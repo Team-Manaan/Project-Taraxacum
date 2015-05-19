@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -68,16 +69,23 @@ class Game
         int y = 0;
         int x = 0;
         int playfieldWidht = 20;
-        double speed = 100.0;
+        double speed = 50.0;
+        double defSpeed = 50.0;
         int livesCount = 5;
         int geneticPoints = 0;
         int level = 0;
         int checker = 0;
 
+        //Scorint system
+        Stopwatch stopwatch = new Stopwatch();
+        double score = 0;
+        int distance = 1;
+        int increment = 0;
+
         //Creating the character
         GameObject sperm = new GameObject();
         sperm.x = 10;
-        sperm.y = Console.WindowHeight - 7;
+        sperm.y = Console.WindowHeight - 6;
         sperm.c = '?';
         sperm.color = ConsoleColor.White;
 
@@ -86,7 +94,7 @@ class Game
         List<GameObject> obstacles = new List<GameObject>();
 
 
-
+        Random bonusChance = new Random();
 
 
         while (true)
@@ -99,6 +107,27 @@ class Game
             newObstacle.y = 0;
             newObstacle.c = 'O';
             obstacles.Add(newObstacle);
+
+            //create bonuses
+            if (bonusChance.Next(0, 101) <= 5)
+            {
+                GameObject bonus = new GameObject();
+                bonus.color = ConsoleColor.White;
+                bonus.x = randomGenerator.Next(10, playfieldWidht);
+                bonus.y = 0;
+                bonus.c = '#';
+                obstacles.Add(bonus);
+            }
+            else if (bonusChance.Next(0, 100) <= 1)
+            {
+                GameObject bonusLife = new GameObject();
+                bonusLife.color = ConsoleColor.Blue;
+                bonusLife.x = randomGenerator.Next(10, playfieldWidht);
+                bonusLife.y = 0;
+                bonusLife.c = '*';
+                obstacles.Add(bonusLife);
+            }
+
             //controls the ammount of rocks
             if (checker > 2)
             {
@@ -135,10 +164,7 @@ class Game
                     {
                         sperm.x = sperm.x + 1;
                     }
-
-
                 }
-
             }
 
             List<GameObject> newList = new List<GameObject>();
@@ -158,8 +184,28 @@ class Game
                 //If sperm is hitted substract life
                 if (newObstacleB.y == sperm.y && newObstacleB.x == sperm.x)
                 {
-                    livesCount--;
-                    hitted = true;
+                    //Calculate distance
+                    distance++;
+                    if (distance >= Console.BufferHeight)
+                    {
+                        distance = 0;
+                    }
+
+                    if (newObstacleB.c == '#')
+                    {
+                        geneticPoints += 50;
+                        increment += 50;
+                    }
+                    else if (newObstacleB.c == '*')
+                    {
+                        livesCount++;
+                    }
+                    else
+                    {
+                        livesCount--;
+                        hitted = true;
+                    }
+
                     //If live count is bellow zero end the game
                     if (livesCount <= 0)
                     {
@@ -176,17 +222,9 @@ class Game
                 {
                     newList.Add(newObstacleB);
                 }
-
-
             }
 
-
-
-
             obstacles = newList;
-
-
-
 
             //Print obstacles
             foreach (var obstacle in obstacles)
@@ -201,7 +239,7 @@ class Game
             if (hitted) // if hitted print the sperm as an X.
             {
                 obstacles.Clear();
-
+                speed = defSpeed;
                 PrintPosition(sperm.x, sperm.y, 'X', ConsoleColor.Red);
             }
             else //If hitted print as X
@@ -213,10 +251,7 @@ class Game
             PrintStringPosition(0, 34, "Level: " + level, ConsoleColor.White);
 
 
-            Thread.Sleep((int)(200 - speed));
-
-
-
+            Thread.Sleep((int)(300 - speed));
 
             //Playfield from 10,0 to 20,30
             //for (int i = 0; i < 30; i++)
@@ -230,8 +265,19 @@ class Game
 
 
             //}
+            score = (double)stopwatch.ElapsedMilliseconds * distance/10000 * speed + 1;
+            increment += (int)score;
+            geneticPoints += (int)score;
 
-
+            //Control speed
+            if (speed <= 200)
+            {
+                if (increment >= 50)
+                {
+                    speed += 10;
+                    increment = 0;
+                }
+            }
 
             Console.Clear();
 
