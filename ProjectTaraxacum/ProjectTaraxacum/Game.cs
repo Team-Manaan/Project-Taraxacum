@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using System.IO;
 
 
 struct GameObject
@@ -17,6 +18,44 @@ struct GameObject
 
 class Game
 {
+    static void PrintHighScores(double score)
+    {
+        string[] oneLine = new string[10];
+        var reader = new StreamReader("high-score.txt");
+        using (reader)
+        {
+            string line = reader.ReadLine();
+            oneLine = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            for (int i = 1; i < oneLine.Length; i += 2)
+            {
+                if (score > int.Parse(oneLine[i]))
+                {
+                    for (int j = i + 2; j < oneLine.Length - 2; j += 2)
+                    {
+                        oneLine[j] = oneLine[j - 2];
+                    }
+                    oneLine[i] = score.ToString();
+                    break;
+                }
+            }
+
+            Console.WriteLine("High Scores:");
+            for (int i = 0; i < oneLine.Length - 1; i += 2)
+            {
+                Console.WriteLine("{0} {1}",
+                                  oneLine[i],
+                                  oneLine[i + 1]);
+            }
+        }
+
+        var writer = new StreamWriter("high-score.txt");
+        using (writer)
+        {
+            string line = string.Join(" ", oneLine);
+            writer.Write(line);
+        }
+    }
 
     static void PrintPosition(int x, int y, char c, ConsoleColor color = ConsoleColor.Gray)
     {
@@ -238,6 +277,8 @@ class Game
 
                         PrintStringPosition(0, 32, "Sperms: " + livesCount, ConsoleColor.White);
                         PrintStringPosition(8, 7, "GAME OVER", ConsoleColor.Red);
+                        Console.WriteLine();
+                        PrintHighScores(geneticPoints);
                         Console.ReadLine();
                         return;
 
@@ -298,7 +339,7 @@ class Game
                 newWall.color = oldWall.color;
 
                 newWallOne.Add(newWall);
-                
+
             }
 
             wallOne = newWallOne;
