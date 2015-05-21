@@ -31,7 +31,7 @@ class Game
             {
                 if (score > int.Parse(oneLine[i]))
                 {
-                    for (int j = i + 2; j < oneLine.Length - 2; j += 2)
+                    for (int j = oneLine.Length - 1; j >= i + 2; j -= 2)
                     {
                         oneLine[j] = oneLine[j - 2];
                     }
