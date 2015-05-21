@@ -16,3 +16,9 @@ D:\Stuff and things\Project-Taraxacum\ProjectTaraxacum\ProjectTaraxacum\obj\Debu
 D:\Stuff and things\Project-Taraxacum\ProjectTaraxacum\ProjectTaraxacum\bin\Debug\ProjectTaraxacum.exe
 D:\Stuff and things\Project-Taraxacum\ProjectTaraxacum\ProjectTaraxacum\bin\Debug\ProjectTaraxacum.pdb
 D:\Stuff and things\Project-Taraxacum\ProjectTaraxacum\ProjectTaraxacum\obj\Debug\ProjectTaraxacum.csprojResolveAssemblyReference.cache
+E:\SoftUniProjects\ProjectTaraxacum\ProjectTaraxacum\bin\Debug\ProjectTaraxacum.exe.config
+E:\SoftUniProjects\ProjectTaraxacum\ProjectTaraxacum\obj\Debug\ProjectTaraxacum.exe
+E:\SoftUniProjects\ProjectTaraxacum\ProjectTaraxacum\obj\Debug\ProjectTaraxacum.pdb
+E:\SoftUniProjects\ProjectTaraxacum\ProjectTaraxacum\bin\Debug\ProjectTaraxacum.exe
+E:\SoftUniProjects\ProjectTaraxacum\ProjectTaraxacum\bin\Debug\ProjectTaraxacum.pdb
+E:\SoftUniProjects\ProjectTaraxacum\ProjectTaraxacum\obj\Debug\ProjectTaraxacum.csprojResolveAssemblyReference.cache

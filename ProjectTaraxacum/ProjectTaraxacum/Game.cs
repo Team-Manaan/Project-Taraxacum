@@ -62,6 +62,7 @@ class Game
         int geneticPoints = 0;
         int level = 0;
         int checker = 0;
+        int minObstacleCount = 2;
 
         //Scorint system
         Stopwatch stopwatch = new Stopwatch();
@@ -137,13 +138,13 @@ class Game
             if (bonusChance.Next(0, 101) <= 5)
             {
                 GameObject bonus = new GameObject();
-                bonus.color = ConsoleColor.White;
+                bonus.color = ConsoleColor.Yellow;
                 bonus.x = randomGenerator.Next(10, playfieldWidht);
                 bonus.y = 0;
-                bonus.c = '#';
+                bonus.c = 'G';
                 obstacles.Add(bonus);
             }
-            else if (bonusChance.Next(0, 100) <= 1)
+            else if (bonusChance.Next(0, 1000) <= 1)
             {
                 GameObject bonusLife = new GameObject();
                 bonusLife.color = ConsoleColor.Blue;
@@ -154,7 +155,7 @@ class Game
             }
 
             //controls the ammount of rocks
-            if (checker > 2)
+            if (checker > minObstacleCount)
             {
                 obstacles.Remove(newObstacle);
 
@@ -216,7 +217,7 @@ class Game
                         distance = 0;
                     }
 
-                    if (newObstacleB.c == '#')
+                    if (newObstacleB.c == 'G')
                     {
                         geneticPoints += 50;
                         increment += 50;
@@ -265,6 +266,7 @@ class Game
             {
                 obstacles.Clear();
                 speed = defSpeed;
+                minObstacleCount = 2;
                 PrintPosition(sperm.x, sperm.y, 'X', ConsoleColor.Red);
             }
             else //If hitted print as X
@@ -337,19 +339,27 @@ class Game
             }
 
 
-            Thread.Sleep((int)(300 - speed));
+            Thread.Sleep((int)(200 - speed));
 
             score = (double)stopwatch.ElapsedMilliseconds * distance / 10000 * speed + 1;
             increment += (int)score;
             geneticPoints += (int)score;
 
             //Control speed
-            if (speed <= 200)
+            if (speed <= 100)
             {
                 if (increment >= 50)
                 {
-                    speed += 2;
+                    speed += 10;
                     increment = 0;
+                }
+                if (speed == 80)
+                {
+                    minObstacleCount = 3;
+                }
+                else if (speed == 100)
+                {
+                    minObstacleCount = 4;
                 }
             }
 
