@@ -4,3 +4,9 @@ E:\Visual Studio Projects\SoftUni\ProjectTaraxacum\ProjectTaraxacum\bin\Debug\Pr
 E:\Visual Studio Projects\SoftUni\ProjectTaraxacum\ProjectTaraxacum\obj\Debug\ProjectTaraxacum.csprojResolveAssemblyReference.cache
 E:\Visual Studio Projects\SoftUni\ProjectTaraxacum\ProjectTaraxacum\obj\Debug\ProjectTaraxacum.exe
 E:\Visual Studio Projects\SoftUni\ProjectTaraxacum\ProjectTaraxacum\obj\Debug\ProjectTaraxacum.pdb
+E:\Project-Taraxacum\ProjectTaraxacum\ProjectTaraxacum\bin\Debug\ProjectTaraxacum.exe.config
+E:\Project-Taraxacum\ProjectTaraxacum\ProjectTaraxacum\obj\Debug\ProjectTaraxacum.exe
+E:\Project-Taraxacum\ProjectTaraxacum\ProjectTaraxacum\obj\Debug\ProjectTaraxacum.pdb
+E:\Project-Taraxacum\ProjectTaraxacum\ProjectTaraxacum\bin\Debug\ProjectTaraxacum.exe
+E:\Project-Taraxacum\ProjectTaraxacum\ProjectTaraxacum\bin\Debug\ProjectTaraxacum.pdb
+E:\Project-Taraxacum\ProjectTaraxacum\ProjectTaraxacum\obj\Debug\ProjectTaraxacum.csprojResolveAssemblyReference.cache

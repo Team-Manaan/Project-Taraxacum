@@ -18,7 +18,6 @@ struct GameObject
 class Game
 {
 
-
     static void PrintPosition(int x, int y, char c, ConsoleColor color = ConsoleColor.Gray)
     {
         Console.SetCursorPosition(x, y);
@@ -32,18 +31,6 @@ class Game
         Console.SetCursorPosition(x, y);
         Console.ForegroundColor = color;
         Console.Write(str);
-    }
-
-    static void PrintLine()
-    {
-        for (int i = 0; i < 30; i++)
-        {
-
-            PrintPosition(i, 31, '#', ConsoleColor.DarkRed);
-
-        }
-
-
     }
 
     private static void ClearLine(int left, int top)
@@ -96,6 +83,44 @@ class Game
 
         Random bonusChance = new Random();
 
+
+        List<GameObject> wallOne = new List<GameObject>();
+        for (int i = 0; i < 30; i++)
+        {
+            GameObject temp = new GameObject();
+            temp.x = 8;
+            temp.y = i;
+            temp.color = ConsoleColor.Cyan;
+
+            if (i % 2 == 0)
+            {
+                temp.c = '\\';
+            }
+            else
+            {
+                temp.c = '/';
+            }
+            wallOne.Add(temp);
+        }
+
+        List<GameObject> wallTwo = new List<GameObject>();
+        for (int i = 0; i < 30; i++)
+        {
+            GameObject temp = new GameObject();
+            temp.x = 21;
+            temp.y = i;
+            temp.color = ConsoleColor.Cyan;
+
+            if (i % 2 == 0)
+            {
+                temp.c = '/';
+            }
+            else
+            {
+                temp.c = '\\';
+            }
+            wallTwo.Add(temp);
+        }
 
         while (true)
         {
@@ -246,26 +271,75 @@ class Game
             {
                 PrintPosition(sperm.x, sperm.y, sperm.c, sperm.color);
             }
+
             PrintStringPosition(0, 32, "Sperms: " + livesCount, ConsoleColor.White);
             PrintStringPosition(0, 33, "Genetic Points: " + geneticPoints, ConsoleColor.White);
             PrintStringPosition(0, 34, "Level: " + level, ConsoleColor.White);
 
+            //moving wall one
+            List<GameObject> newWallOne = new List<GameObject>();
+
+            for (int i = 0; i < wallOne.Count; i++)
+            {
+                GameObject oldWall = wallOne[i];
+                GameObject newWall = new GameObject();
+                newWall.x = oldWall.x;
+                newWall.y = oldWall.y;
+                if (oldWall.c == '/')
+                {
+                    newWall.c = '\\';
+                }
+                else
+                {
+                    newWall.c = '/';
+                }
+                newWall.color = oldWall.color;
+
+                newWallOne.Add(newWall);
+                
+            }
+
+            wallOne = newWallOne;
+
+            foreach (var brick in wallOne)
+            {
+                PrintPosition(brick.x, brick.y, brick.c, brick.color);
+            }
+
+            //moving wall two
+            List<GameObject> newWallTwo = new List<GameObject>();
+
+            for (int i = 0; i < wallTwo.Count; i++)
+            {
+                GameObject oldWall = wallTwo[i];
+                GameObject newWall = new GameObject();
+                newWall.x = oldWall.x;
+                newWall.y = oldWall.y;
+                if (oldWall.c == '/')
+                {
+                    newWall.c = '\\';
+                }
+                else
+                {
+                    newWall.c = '/';
+                }
+                newWall.color = oldWall.color;
+
+                newWallTwo.Add(newWall);
+
+            }
+
+            wallTwo = newWallTwo;
+
+            foreach (var brick in wallTwo)
+            {
+                PrintPosition(brick.x, brick.y, brick.c, brick.color);
+            }
+
 
             Thread.Sleep((int)(300 - speed));
 
-            //Playfield from 10,0 to 20,30
-            //for (int i = 0; i < 30; i++)
-
-            //{
-            //    ClearLine(0, i);
-            //    for (int j = 10; j < 20; j++)
-            //    {
-            //        ClearLine(j, i);
-            //    }
-
-
-            //}
-            score = (double)stopwatch.ElapsedMilliseconds * distance/10000 * speed + 1;
+            score = (double)stopwatch.ElapsedMilliseconds * distance / 10000 * speed + 1;
             increment += (int)score;
             geneticPoints += (int)score;
 
@@ -274,13 +348,12 @@ class Game
             {
                 if (increment >= 50)
                 {
-                    speed += 10;
+                    speed += 2;
                     increment = 0;
                 }
             }
 
             Console.Clear();
-
 
         }
 
