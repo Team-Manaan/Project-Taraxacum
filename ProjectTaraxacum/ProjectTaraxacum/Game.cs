@@ -350,7 +350,7 @@ class Game
             {
                 if (increment >= 50)
                 {
-                    speed += 10;
+                    speed += 2;
                     increment = 0;
                 }
                 if (speed == 80)
