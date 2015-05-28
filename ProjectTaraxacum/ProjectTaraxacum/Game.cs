@@ -11,8 +11,9 @@
     
     class Game
     {
-        static void Intro(bool intro)
+        static void Intro(bool intro)   // Void method about "Text intro"
         {
+            
             string[] text =  
                 {
                     "Team", "\"Manaan\" ",
@@ -194,7 +195,7 @@
                 writer.Write(line);
             }
         }
-
+        
         static void PrintPosition(int x, int y, char c, ConsoleColor color = ConsoleColor.Gray)
         {
             Console.SetCursorPosition(x, y);
@@ -210,17 +211,17 @@
             Console.Write(str);
         }
 
-        private static void ClearLine(int left, int top)
-        {
+        //private static void ClearLine(int left, int top)    
+        //{
 
-            int pLeft = Console.CursorLeft;
-            int pTop = Console.CursorTop;
+        //    int pLeft = Console.CursorLeft;
+        //    int pTop = Console.CursorTop;
 
-            Console.SetCursorPosition(left, top);
-            Console.Write(new string(' ', Console.BufferWidth - Console.CursorLeft));
+        //    Console.SetCursorPosition(left, top);
+        //    Console.Write(new string(' ', Console.BufferWidth - Console.CursorLeft));
 
-            Console.SetCursorPosition(pLeft, pTop);
-        }
+        //    Console.SetCursorPosition(pLeft, pTop);
+        //}
 
 
 
@@ -712,15 +713,15 @@
             }
             else if (badGenesPercentage <= 30)
             {
-                babyDescription += "Average baby";
+                babyDescription += "Not so clever baby";
             }
             else if (badGenesPercentage <= 40)
             {
-                babyDescription += "Average baby";
+                babyDescription += "The Baby is gay.";
             }
             else if (badGenesPercentage <= 50)
             {
-                babyDescription += "Average baby";
+                babyDescription += "Beautifull but stuped baby";
             }
             else if (badGenesPercentage <= 60)
             {
